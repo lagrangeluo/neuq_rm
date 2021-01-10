@@ -35,10 +35,6 @@ int main()
 	max_base_rotational_speed = MAX_BASE_ROTATIONAL_SPEED;			//地盘中心最大角速度
 //	max_motor_speed = MAX_MOTOR_SPEED;		//电机最大转速，通过上面宏定义更改
 		
-	//	set_moto_angle(4000,0,0,0);		//调试   设定指定角度
-	
-//	set_moto_speed(0,0,0,0);			//调试    设定指定速度
-	
 	while(1)
 	{
 		
