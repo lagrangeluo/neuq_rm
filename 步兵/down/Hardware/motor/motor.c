@@ -10,8 +10,11 @@
 MOTOR_t motor1,motor2,motor3,motor4,motor5,motor6,gimbal1,gimbal2;
 LOOPBACK loopback;
 
-int max_motor_speed=15336;		//电机最大线速度
+int max_motor_speed=MAX_MOTOR_SPEED;		//电机最大线速度
+float max_base_linear_speed=MAX_BASE_LINEAR_SPEED;  //底盘中心最大线速度 
+float max_base_rotational_speed=MAX_BASE_ROTATIONAL_SPEED;  //地盘中心最大角速度
 int callback_flag=1;
+
 
 void record_motor_callback(MOTOR_t *motor, uint16_t angle, int16_t speed, int16_t current)
 {

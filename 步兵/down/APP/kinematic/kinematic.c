@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    Project/APP/kinematic.c 
-  * @author  Joe 
+  * @author  Siyuan Qiao&Junyu Luo 
   * @version V1.0.0
   * @date    2-09-2020
   * @brief   底盘正逆运动学演算
@@ -16,15 +16,11 @@
 
 #include "kinematic.h"
 #include "motor.h"
-
 #include "speed_pid.h"
 #include "angle_pid.h"
 
 
 Kinematics_t Kinematics;
-
-//float max_base_linear_speed=217.817f;		//底盘最大线速度
-//float max_base_rotational_speed=7.260570f;		//底盘最大角速度
 
 //逆运动学公式
 //把想要得到的底盘速度转换为轮子的线速度
