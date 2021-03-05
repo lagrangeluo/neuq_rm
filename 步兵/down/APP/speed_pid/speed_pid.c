@@ -13,7 +13,7 @@
 
 PID_t pid_t;
 //int vpid_out_max=vPID_OUT_MAX;
-enum switch_flag_t switch_flag;
+enum switch_flag_t switch_flag; //不同模块的枚举类型
 
 /**
   * @breif 电机转速pid参数初始化
@@ -168,7 +168,7 @@ void vpid_trigger_realize(float kp,float ki,float kd)
 /**
   * @breif 云台pid速度环运算函数
   */
-void vpid_gimbal_realize(float kp,float ki,float kd)
+void vpid_gimbal_realize(float kp_y,float ki_y,float kd_y,float kp_p,float ki_p,float kd_p)
 {
 	//读取电机当前转速
 	gimbal_y.vpid.actual_speed = gimbal_y.actual_speed;
@@ -176,8 +176,8 @@ void vpid_gimbal_realize(float kp,float ki,float kd)
 	
 	switch_flag = GIMBAL;
 	
-	vpid_realize(&gimbal_y.vpid,kp,ki,kd);  //开始pid计算
-	vpid_realize(&gimbal_p.vpid,kp,ki,kd);
+	vpid_realize(&gimbal_y.vpid,kp_y,ki_y,kd_y);  //开始pid计算
+	vpid_realize(&gimbal_p.vpid,kp_p,ki_p,kd_p);
 	
 	switch_flag = NUL;
 }

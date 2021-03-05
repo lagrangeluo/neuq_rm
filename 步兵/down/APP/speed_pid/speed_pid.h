@@ -46,33 +46,33 @@
 #define pid_init() \
 				do{ \
 					/*底盘速度环*/                        \
-					pid_t.chassic_pid.speed_loop.kp = 0; \
-					pid_t.chassic_pid.speed_loop.ki = 0; \
+					pid_t.chassic_pid.speed_loop.kp = 2; \
+					pid_t.chassic_pid.speed_loop.ki = 0.05; \
 					pid_t.chassic_pid.speed_loop.kd = 0; \
 					                                     \
 					/*拨弹轮速度环*/                      \
-					pid_t.trigger_pid.speed_loop.kp = 0; \
-					pid_t.trigger_pid.speed_loop.ki = 0; \
+					pid_t.trigger_pid.speed_loop.kp = 2.5; \
+					pid_t.trigger_pid.speed_loop.ki = 0.05; \
 					pid_t.trigger_pid.speed_loop.kd = 0; \
                                                \
 					/*云台yaw位置环*/                    \
-					pid_t.yaw_pid.position_loop.kp = 0; \
+					pid_t.yaw_pid.position_loop.kp = 2; \
 					pid_t.yaw_pid.position_loop.ki = 0; \
 					pid_t.yaw_pid.position_loop.kd = 0; \
 					                                    \
 					/*云台yaw速度环*/                    \
-				  pid_t.yaw_pid.speed_loop.kp = 0; \
-				  pid_t.yaw_pid.speed_loop.ki = 0; \
+				  pid_t.yaw_pid.speed_loop.kp = 380; \
+				  pid_t.yaw_pid.speed_loop.ki = 0.01; \
 				  pid_t.yaw_pid.speed_loop.kd = 0; \
 					                                 \
 					/*云台pitch位置环*/                    \
-					pid_t.pitch_pid.position_loop.kp = 0; \
+					pid_t.pitch_pid.position_loop.kp = 2; \
 					pid_t.pitch_pid.position_loop.ki = 0; \
 					pid_t.pitch_pid.position_loop.kd = 0; \
 					                                      \
 					/*云台pitch速度环*/                    \
-				  pid_t.pitch_pid.speed_loop.kp = 0; \
-				  pid_t.pitch_pid.speed_loop.ki = 0; \
+				  pid_t.pitch_pid.speed_loop.kp = 380; \
+				  pid_t.pitch_pid.speed_loop.ki = 0.01; \
 				  pid_t.pitch_pid.speed_loop.kd = 0; \
 				}while(0)                            \
 				
@@ -115,7 +115,7 @@ void VPID_Init_All(void);			//电机转速PID参数初始化
 
 void vpid_chassic_realize(float kp,float ki,float kd);				//电机转速PID实现
 void vpid_trigger_realize(float kp,float ki,float kd);      //拨弹
-void vpid_gimbal_realize(float kp,float ki,float kd); //云台速度环
+void vpid_gimbal_realize(float kp_y,float ki_y,float kd_y,float kp_p,float ki_p,float kd_p); //云台速度环
 
 int abs(int input);				//求绝对值函数
 int pid_auto(void);

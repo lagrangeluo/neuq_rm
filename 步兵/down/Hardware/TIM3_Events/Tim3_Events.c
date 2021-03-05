@@ -37,10 +37,10 @@ void Robo_Move()
 	 }
  
 	
-   	vpid_chassic_realize(2,0.05,0);			//速度闭环2  0.05
-	  vpid_trigger_realize(2.5,0.05,0);      //拨弹轮速度闭环  参数未确定   2.5  0.05
-    //apid_gimbal_realize(2.5,0,0);	        //云台位置环给定
-	  vpid_gimbal_realize(380,0.01,0);     //  云台速度环设定
+   	vpid_chassic_realize(v_chassic_p,v_chassic_i,v_chassic_d);			//速度闭环2  0.05
+	  vpid_trigger_realize(v_trigger_p,v_trigger_i,v_trigger_d);      //拨弹轮速度闭环  参数未确定   2.5  0.05
+    //apid_gimbal_realize(a_yaw_p,a_yaw_i,a_yaw_d,a_pitch_p,a_pitch_i,a_pitch_d);	        //云台位置环给定
+	  vpid_gimbal_realize(v_yaw_p,v_yaw_i,v_yaw_d,v_pitch_p,v_pitch_i,v_pitch_d);     //  云台速度环设定
 		set_chassis_current();		//设定电机电流
 	  set_trigger_current();
 	  set_gimbal_current();

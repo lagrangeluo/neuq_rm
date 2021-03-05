@@ -39,14 +39,14 @@ void TIM3_IRQHandler(void)
 		time_count++;
 		
 		/*****   遥控器控制    ******/
-		Remote_Control();				//遥控器控制代码
+		//Remote_Control();				//遥控器控制代码
 		
 		/****  ROS上位机控制  *****/
 		if(flag_command_recieved == 1)	//每一毫秒检查一次是否收到控制指令
 		{
 			//如果自动控制才可以给命令的目标速度赋值
 			if(1)//(Control_Mode & auto_control) == auto_control
-			resolve_json_chassis_command();
+			//resolve_json_chassis_command();
 		
 			flag_command_recieved = 0;	//命令接收标志位清零
 		}

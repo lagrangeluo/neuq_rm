@@ -234,65 +234,66 @@ static float caculate_rotational_speed(int width,int mid,int min,int max)
 
 static float caculate_gimbal_pitch_angle(int width,int mid,int min,int max)
 {
+	float pwm_can;                         //此变量返回计算得出的pwm脉宽或者can模式下的机械角度值
 	switch(gimbal_modes)
 	{
 		case(gimbal_pwm_mode):
 			
-	   float pwm_pulse=BASIC_PITCH_ANGLE_PWM;
+	   pwm_can=BASIC_PITCH_ANGLE_PWM;
 		 if(width>=(mid+2))
-		  pwm_pulse=(BASIC_PITCH_ANGLE_PWM - 1.0*(width-(mid+2))/(max-(mid+2))*210);
+		  pwm_can=(BASIC_PITCH_ANGLE_PWM - 1.0*(width-(mid+2))/(max-(mid+2))*210);
 	   else if(width<=(mid-2))
-	    pwm_pulse=(BASIC_PITCH_ANGLE_PWM + 1.0*((mid-2)-width)/((mid-2)-min)*105);
+	    pwm_can=(BASIC_PITCH_ANGLE_PWM + 1.0*((mid-2)-width)/((mid-2)-min)*105);
 	   else
-		  pwm_pulse=BASIC_PITCH_ANGLE_PWM;
-	   return pwm_pulse;
+		  pwm_can=BASIC_PITCH_ANGLE_PWM;
 	
 		 break;
 		 
 		case(gimbal_can_mode):
-		 float can_angle=BASIC_PITCH_ANGLE_CAN;
+		 pwm_can=BASIC_PITCH_ANGLE_CAN;
 		 if(width>=(mid+2))
-		  can_angle=(BASIC_PITCH_ANGLE_CAN - 1.0*(width-(mid+2))/(max-(mid+2))*2047);
+		  pwm_can=(BASIC_PITCH_ANGLE_CAN - 1.0*(width-(mid+2))/(max-(mid+2))*2047);
 	   else if(width<=(mid-2))
-	    can_angle=(BASIC_PITCH_ANGLE_CAN + 1.0*((mid-2)-width)/((mid-2)-min)*1023);
+	    pwm_can=(BASIC_PITCH_ANGLE_CAN + 1.0*((mid-2)-width)/((mid-2)-min)*1023);
 	   else
-		  can_angle=BASIC_PITCH_ANGLE_CAN;
-	   return can_angle;
+		  pwm_can=BASIC_PITCH_ANGLE_CAN;		
 		 
 		 break;
 		 default:break;
    }
+	return pwm_can;
 }
 
 static float caculate_gimbal_yaw_angle(int width,int mid,int min,int max)
 {
+	float pwm_can;
 	switch(gimbal_modes)
 	{
 		case(gimbal_pwm_mode):
-	   float pwm_pulse=BASIC_YAW_ANGLE_PWM;
+	    pwm_can=BASIC_YAW_ANGLE_PWM;
 		 if(width>=(mid+2))
-	 	  pwm_pulse=(BASIC_YAW_ANGLE_PWM - 1.0*(width-(mid+2))/(max-(mid+2))*420);
+	 	  pwm_can=(BASIC_YAW_ANGLE_PWM - 1.0*(width-(mid+2))/(max-(mid+2))*420);
 	   else if(width<=(mid-2))
-	    pwm_pulse=(BASIC_YAW_ANGLE_PWM + 1.0*((mid-2)-width)/((mid-2)-min)*420);
+	    pwm_can=(BASIC_YAW_ANGLE_PWM + 1.0*((mid-2)-width)/((mid-2)-min)*420);
 	   else
-		  pwm_pulse=BASIC_YAW_ANGLE_PWM;
-	   return pwm_pulse;
+		  pwm_can=BASIC_YAW_ANGLE_PWM;
 
 		 break;
 		 
 		 case(gimbal_can_mode):
-		 float can_angle=BASIC_YAW_ANGLE_CAN;
+		  pwm_can=BASIC_YAW_ANGLE_CAN;
 		 if(width>=(mid+2))
-		  can_angle=(BASIC_YAW_ANGLE_CAN - 1.0*(width-(mid+2))/(max-(mid+2))*4095);
+		  pwm_can=(BASIC_YAW_ANGLE_CAN - 1.0*(width-(mid+2))/(max-(mid+2))*4095);
 	   else if(width<=(mid-2))
-	    can_angle=(BASIC_YAW_ANGLE_CAN + 1.0*((mid-2)-width)/((mid-2)-min)*4095);
+	    pwm_can=(BASIC_YAW_ANGLE_CAN + 1.0*((mid-2)-width)/((mid-2)-min)*4095);
 	   else
-		  can_angle=BASIC_YAW_ANGLE_CAN;
-	   return can_angle;
+		  pwm_can=BASIC_YAW_ANGLE_CAN;
 		 
 		 break;
 		 default:break;
+		 
    }
+		 return pwm_can;
 }
 
 
