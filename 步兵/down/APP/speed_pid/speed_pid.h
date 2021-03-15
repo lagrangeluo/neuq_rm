@@ -62,14 +62,14 @@
 					pid_t.trigger_pid.speed_loop.kd = 0; \
                                                \
 					/*云台yaw位置环*/                    \
-					pid_t.yaw_pid.position_loop.kp = 1; \
-					pid_t.yaw_pid.position_loop.ki = 0; \
+					pid_t.yaw_pid.position_loop.kp = 0.22; \
+					pid_t.yaw_pid.position_loop.ki = 0.14; \
 					pid_t.yaw_pid.position_loop.kd = 0; \
 					                                    \
 					/*云台yaw速度环*/                    \
-				  pid_t.yaw_pid.speed_loop.kp = 220; \
+				  pid_t.yaw_pid.speed_loop.kp = 170; \
 				  pid_t.yaw_pid.speed_loop.ki = 0; \
-				  pid_t.yaw_pid.speed_loop.kd = 0; \
+				  pid_t.yaw_pid.speed_loop.kd = 300; \
 					                                 \
 					/*云台pitch位置环*/                    \
 					pid_t.pitch_pid.position_loop.kp = 0; \

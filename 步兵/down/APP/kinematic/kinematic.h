@@ -11,6 +11,8 @@
 #define VEL2RPM 1.909859f										//线速度转转度
 #define M2006_REDUCTION_RATIO 36.000000f		//齿轮箱减速比
 #define M3508_REDUCTION_RATIO 19.000000f		//齿轮箱减速比
+#define GM6020_ENCODER_ANGLE  8192.0f
+
 
 #define MAX_MOTOR_SPEED   15336				//电机最大转速，宏定义方便修改   范围0 - 10000   15336   
 #define MAX_BASE_LINEAR_SPEED    217.817f    //底盘最大平移速度，单位cm/s   
@@ -100,6 +102,7 @@ void chassis_speed_control(float speed_x,float speed_y,float speed_r);		//将三个
 void trigger_control(float trigger_angular);
 void gimbal_speed_control(float gimbal_y_angle,float gimbal_p_angle);
 void gimbal_angle_control(float yaw_angle,float pitch_angle);
+void Get_Gimbal_Angle(void);
 
 #endif
 

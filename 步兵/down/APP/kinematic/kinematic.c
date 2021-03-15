@@ -68,7 +68,11 @@ void Get_Base_Velocities(void)
 				+ Kinematics.wheel3.actual_speed.linear_vel + Kinematics.wheel4.actual_speed.linear_vel)/(4.0f);
 }
 
-
+void Get_Gimbal_Angle()
+{
+  Kinematics.yaw.actual_angle = (gimbal_y.actual_angle-BASIC_YAW_ANGLE_CAN)*(360.0f/GM6020_ENCODER_ANGLE);
+  Kinematics.pitch.actual_angle = (gimbal_p.actual_angle-BASIC_PITCH_ANGLE_CAN)*(360.0f/GM6020_ENCODER_ANGLE);
+}
 
 // 函数: speed_control()
 // 描述: 将pid速度输出转换为电机速度，最终传递给速度pid

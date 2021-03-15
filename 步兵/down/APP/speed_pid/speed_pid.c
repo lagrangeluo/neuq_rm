@@ -11,10 +11,9 @@
 */
 #include "speed_pid.h"
 
-int errr[AVERAGE]={0};
+int errr_yaw[AVERAGE]={0};                           //云台yaw轴pid err数组
 int average = AVERAGE;
 PID_t pid_t;
-//int vpid_out_max=vPID_OUT_MAX;
 enum switch_flag_t switch_flag; //不同模块的枚举类型
 
 /**
@@ -34,6 +33,7 @@ void VPID_Init(VPID_t *vpid)
 	vpid->PID_OUT=0;
 	vpid->pid_count=0;
 	vpid->average_err=0;
+	vpid->last_average_err=0; 
 }
 
 /**
@@ -106,10 +106,10 @@ void vpid_realize(VPID_t *vpid,float kp,float ki,float kd)
 		 
 		if(vpid->pid_count>=average)
 		vpid->pid_count=0;
-		errr[vpid->pid_count] = 0.5*(vpid->err+vpid->last_err);
+		errr_yaw[vpid->pid_count] = 0.5*(vpid->err+vpid->last_err);
 		vpid->pid_count++;
 		for(int i=0;i<=(average-1);i++)
-		vpid->average_err += (errr[i]);  
+		vpid->average_err += (errr_yaw[i]);  
 
 	 	if(abs(vpid->err) <= GIMBAL_IntegralSeparation)		//积分分离
 		vpid->err_integration += vpid->average_err;
@@ -121,8 +121,9 @@ void vpid_realize(VPID_t *vpid,float kp,float ki,float kd)
 		
 	  vpid->P_OUT = 0.1f*kp*vpid->average_err;								//P项
 	  vpid->I_OUT = ki * vpid->err_integration;		//I项
-	  vpid->D_OUT = kd * (vpid->err-vpid->last_err);//D项
+	  vpid->D_OUT = kd * (vpid->average_err-vpid->last_average_err);//D项
 	  vpid->last_err=vpid->err;
+		vpid->last_average_err =  vpid->average_err;
 	  //输出限幅 
 	  if((vpid->P_OUT + vpid->I_OUT + vpid->D_OUT)> GIMBAL_vPID_max) 
 		vpid->PID_OUT = GIMBAL_vPID_max;

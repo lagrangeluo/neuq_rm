@@ -48,7 +48,7 @@ void Robo_Move()
 	  set_trigger_current();
 	  set_gimbal_current();
 
- /***** ¶æ»úÂö¿í *****/
+ /***** pwmÂö¿íµ÷ÖÆ *****/
 		if(gimbal_modes == gimbal_pwm_mode)
 		{
 	   TIM_SetCompare1(TIM1,pwm_pulse_p);                              //pitchÖá

@@ -190,7 +190,7 @@ void resolve_json_gimbal_angle_command(void)
 	json_t *item_obj;
 	json_error_t error;
 	root = json_loads(json_Buffer,0,&error);
-	gimbal_obj = json_object_get( root, "gimbal_angle" );
+	gimbal_obj = json_object_get( root, "gimbal" );
 	item_obj = json_array_get( gimbal_obj, 0 );
 	Kinematics.yaw.target_angle=1.0f*json_integer_value(item_obj);
 	item_obj = json_array_get( gimbal_obj, 1 );

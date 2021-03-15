@@ -104,7 +104,7 @@ void  all_behavior()
 void mode_init()
 {
 	//通信模式选择
-	control_mode = DJi_Remote_Control;  //	auto_control 上位机控制模式  DJi_Remote_Control  DJI遥控器控制
+	control_mode = auto_control;  //	auto_control 上位机控制模式  DJi_Remote_Control  DJI遥控器控制
 
 
 	//云台模式选择

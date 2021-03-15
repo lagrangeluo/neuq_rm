@@ -100,6 +100,7 @@ void TIM3_IRQHandler(void)
 		
 		if(time_count%4 == 0)		//4ms  测速
 			Get_Base_Velocities();		//计算底盘中心实际速度
+		  Get_Gimbal_Angle();       //计算云台实时角度
 		
 		/****    向上位机发送数据   *****/
 		if(MSG_SEND_EN)

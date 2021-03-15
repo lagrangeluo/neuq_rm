@@ -28,6 +28,8 @@ typedef struct{
 	
 	int pid_count;           //pid变量，用于计算平均误差
 	float average_err;           //平均误差，使误差曲线更加平滑
+	float last_average_err;      //上一次平均误差
+	int pitch_err[10];
 }VPID_t;
 
 //电机机械角度参数
