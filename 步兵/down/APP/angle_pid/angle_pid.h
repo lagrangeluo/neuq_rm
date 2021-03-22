@@ -1,7 +1,7 @@
 #ifndef _ANGLE_PID_H
 #define _ANGLE_PID_H
 #define aPID_OUT_MAX          100		//即最大速度
-
+#define a_PITCH_PID_OUT_MAX   80
 #define set_trigger_motor_angle(motor5_angle) \
         do{ \
 						motor5.apid.target_angle = motor5_angle; \

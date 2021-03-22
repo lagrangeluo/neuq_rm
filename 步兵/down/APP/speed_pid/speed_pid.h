@@ -72,14 +72,14 @@
 				  pid_t.yaw_pid.speed_loop.kd = 300; \
 					                                 \
 					/*云台pitch位置环*/                    \
-					pid_t.pitch_pid.position_loop.kp = 0; \
+					pid_t.pitch_pid.position_loop.kp = 0.29; \
 					pid_t.pitch_pid.position_loop.ki = 0; \
-					pid_t.pitch_pid.position_loop.kd = 0; \
+					pid_t.pitch_pid.position_loop.kd = 1.2; \
 					                                      \
 					/*云台pitch速度环*/                    \
-				  pid_t.pitch_pid.speed_loop.kp = 0; \
+				  pid_t.pitch_pid.speed_loop.kp = 145; \
 				  pid_t.pitch_pid.speed_loop.ki = 0; \
-				  pid_t.pitch_pid.speed_loop.kd = 0; \
+				  pid_t.pitch_pid.speed_loop.kd = 30; \
 				}while(0)                            \
 				
 typedef enum switch_flag_t
@@ -88,6 +88,8 @@ typedef enum switch_flag_t
 	CHASSIS = 1,
 	TRIGGER = 2,
 	GIMBAL  = 3,
+	YAW     = 4,
+	PITCH   = 5,
 	NUL=0,
 }switch_flag_t;
 

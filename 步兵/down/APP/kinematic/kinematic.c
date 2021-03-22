@@ -129,7 +129,7 @@ else if(trigger_angular!=0)
 }
 	}
 
-
+int flag_1=1;
 	
 void gimbal_speed_control(float gimbal_y_speed,float gimbal_p_speed)    //
 {
@@ -140,13 +140,24 @@ void gimbal_speed_control(float gimbal_y_speed,float gimbal_p_speed)    //
 	}
     else*/
     //gimbal_y_speed = KalmanFilter(gimbal_y_speed,1,200);
+	  /*if(Kinematics.pitch.actual_angle<=-55)
+			flag_1=0;
+		if(Kinematics.pitch.actual_angle>45)
+			flag_1=1;
+		if(flag_1==0)
+		{
+		Kinematics.pitch.target_angular=0;
+		gimbal_p.vpid.PID_OUT=0;
+		gimbal_p.vpid.average_err=0;
+		}*/
+	
 	  set_gimbal_speed(gimbal_y_speed,gimbal_p_speed);//(gimbal_y_angle,gimbal_p_angle);
 }
 
 void gimbal_angle_control(float yaw_angle,float pitch_angle)
 {
-	yaw_angle = BASIC_YAW_ANGLE_CAN + yaw_angle/360*8192; 
-	pitch_angle = BASIC_PITCH_ANGLE_CAN + pitch_angle/360*8192;
+	yaw_angle = BASIC_YAW_ANGLE_CAN + yaw_angle/360*8191; 
+	pitch_angle = BASIC_PITCH_ANGLE_CAN + pitch_angle/360*8191;
 	set_gimbal_angle(yaw_angle,pitch_angle);
 }
 

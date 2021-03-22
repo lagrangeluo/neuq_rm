@@ -55,7 +55,7 @@ void apid_realize(APID_t *apid,float kp,float ki,float kd)
 	apid->err = apid->target_angle - apid->actual_angle;
 	switch(switch_flag)
 	{  
-		case(GIMBAL):
+		case(YAW):
 		{
     	apid->P_OUT = kp * apid->err;
 	    apid->D_OUT = kd * (apid->err-apid->last_err);
@@ -69,6 +69,21 @@ void apid_realize(APID_t *apid,float kp,float ki,float kd)
 		  apid->PID_OUT = apid->P_OUT + apid->D_OUT;
     }
 		break;
+		case(PITCH):
+		{
+    	apid->P_OUT = kp * apid->err;
+	    apid->D_OUT = kd * (apid->err-apid->last_err);
+	    apid->last_err = apid->err;
+	
+    	if((apid->P_OUT + apid->D_OUT) > a_PITCH_PID_OUT_MAX) 			
+	   	apid->PID_OUT = a_PITCH_PID_OUT_MAX;
+	    else if((apid->P_OUT + apid->D_OUT) < -a_PITCH_PID_OUT_MAX) 
+		  apid->PID_OUT = -a_PITCH_PID_OUT_MAX;
+	    else
+		  apid->PID_OUT = apid->P_OUT + apid->D_OUT;
+    }
+		break;
+
 	  case(TRIGGER):
 		{
 			apid->P_OUT = kp * apid->err;
@@ -129,11 +144,12 @@ void apid_gimbal_realize(float kp_y,float ki_y,float kd_y,float kp_p,float ki_p,
 {
 	//读取当前角度值
 	gimbal_y.apid.actual_angle = gimbal_y.actual_angle;
-	gimbal_p.apid.actual_angle = gimbal_y.actual_angle;
+	gimbal_p.apid.actual_angle = gimbal_p.actual_angle;
 	
-	switch_flag = GIMBAL;                                //判断标志位
+	switch_flag = YAW;                                //判断标志位
 	//计算电机机械角度pid
 	apid_realize(&gimbal_y.apid,kp_y,ki_y,kd_y);
+	switch_flag = PITCH;                                //判断标志位
 	apid_realize(&gimbal_p.apid,kp_p,ki_p,kd_p);
 	switch_flag = NUL;                                   //标志位清零
 	
