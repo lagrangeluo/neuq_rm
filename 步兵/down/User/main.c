@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    Project/USER/main.c 
-  * @author  Siyuan Qiao&Junyu Luo
+  * @author  Siyuan Qiao&Junyu Luo&Zixuan Li
   * @version V1.0.0
   * @date    1.2021
   * @brief   
@@ -13,13 +13,17 @@
   ...........革命尚未成功，同志仍需努力...........
 */  
 #include "My_Init.h"
+#include "stm32f4xx_it.h"
 /**
   *@brief  主函数初始化，进入循环等待中断
   */
 int main()
 {
+	motor5.round_cnt=0;
 	mode_init();                      //初始化机器人模式控制
+	motor5.round_cnt=0;
  	All_Init();												//机器人硬件及结构体初始化
+	motor5.round_cnt=0;
 	pid_init();                       //初始化pid各项参数的值
 	while(1)                          //进入循环
 	{
@@ -81,6 +85,11 @@ void TIM3_IRQHandler(void)
 				resolve_json_gimbal_speed_command();
 			  flag_command_recieved5 = 0;	
 		}
+			if(flag_command_recieved6 == 1)	
+		{
+				resolve_json_trigger_shoot_command();
+				flag_command_recieved6 = 0;	
+		}
 	}
 		/****  机器人运动控制  *****/
 		if(time_count%7 ==0)		//7ms
@@ -99,8 +108,10 @@ void TIM3_IRQHandler(void)
 		}
 		
 		if(time_count%4 == 0)		//4ms  测速
-			Get_Base_Velocities();		//计算底盘中心实际速度
+		  Get_Base_Velocities();		//计算底盘中心实际速度
 		  Get_Gimbal_Angle();       //计算云台实时角度
+		if(time_count%5 ==0)      //5ms 测试摩擦轮
+			
 		
 		/****    向上位机发送数据   *****/
 		if(MSG_SEND_EN)

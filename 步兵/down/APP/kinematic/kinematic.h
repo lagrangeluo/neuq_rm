@@ -40,8 +40,11 @@
 				do{ \
 					gimbal_y.apid.target_angle = yaw_angle; \
           gimbal_p.apid.target_angle = pitch_angle; \
-				}while(0)                                   \
-
+				}while(0)                                   
+#define set_trigger_angle(trigger_angle) \
+	do{ \
+		motor5.apid.target_angle = trigger_angle; \
+	}while(0) //mhp111
 				
 typedef struct
 {
@@ -100,6 +103,7 @@ void BaseVel_To_WheelVel(float linear_x, float linear_y, float angular_z);
 void Get_Base_Velocities(void);
 void chassis_speed_control(float speed_x,float speed_y,float speed_r);		//将三个方向速度转换为电机转速
 void trigger_control(float trigger_angular);
+void trigger_angle_control(float trigger_angle);//mhp111
 void gimbal_speed_control(float gimbal_y_angle,float gimbal_p_angle);
 void gimbal_angle_control(float yaw_angle,float pitch_angle);
 void Get_Gimbal_Angle(void);

@@ -217,10 +217,10 @@ void set_gimbal_current()
   gimbal_p.target_current = gimbal_p.vpid.PID_OUT;
 	
 	//can总线通信协议，参照电调说明书
-	current_msg[2] =gimbal_y.target_current >> 8;			//1号电机电流高8位
-	current_msg[3] =gimbal_y.target_current & 0xff;		//1号电机电流低8位
-	current_msg[4] =gimbal_p.target_current >> 8;			//2号电机电流高8位
-	current_msg[5] =gimbal_p.target_current & 0xff;		//2号电机电流低8位
+	current_msg[0] =gimbal_y.target_current >> 8;			//1号电机电流高8位
+	current_msg[1] =gimbal_y.target_current & 0xff;		//1号电机电流低8位
+	current_msg[2] =gimbal_p.target_current >> 8;			//2号电机电流高8位
+	current_msg[3] =gimbal_p.target_current & 0xff;		//2号电机电流低8位
 	
 	CAN1_Send_GIMBAL_Msg(current_msg);
 

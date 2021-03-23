@@ -140,9 +140,9 @@ void gimbal_speed_control(float gimbal_y_speed,float gimbal_p_speed)    //
 	}
     else*/
     //gimbal_y_speed = KalmanFilter(gimbal_y_speed,1,200);
-	  /*if(Kinematics.pitch.actual_angle<=-55)
+	/*  if(Kinematics.pitch.actual_angle<=-135)
 			flag_1=0;
-		if(Kinematics.pitch.actual_angle>45)
+		if(Kinematics.pitch.actual_angle>-120)
 			flag_1=1;
 		if(flag_1==0)
 		{
@@ -156,8 +156,11 @@ void gimbal_speed_control(float gimbal_y_speed,float gimbal_p_speed)    //
 
 void gimbal_angle_control(float yaw_angle,float pitch_angle)
 {
+	//if(Kinematics.pitch.actual_angle<=-138)  pitch_angle=-138;
+	//if(Kinematics.pitch.actual_angle>-110)   pitch_angle=-110;
 	yaw_angle = BASIC_YAW_ANGLE_CAN + yaw_angle/360*8191; 
 	pitch_angle = BASIC_PITCH_ANGLE_CAN + pitch_angle/360*8191;
+			
 	set_gimbal_angle(yaw_angle,pitch_angle);
 }
 
@@ -180,4 +183,23 @@ int find_max()
     temp=abs(motor4.target_speed);
   return temp;
 }
-
+//**********************************************************************************mhp111
+int angle_judge_flag=0;
+int angle_first_judge_flag=0;
+void trigger_angle_control(float trigger_angle)
+{	
+	trigger_angle = trigger_angle/360*8191;//Waiting for modification!（已解决）
+	if(angle_first_judge_flag==0)
+	{
+		motor5.apid.trigger_first_total_angle_storage=motor5.total_angle;
+		angle_first_judge_flag++;
+	}
+	if(angle_judge_flag==0&&abs(motor5.apid.err>5000000))//只读取一次标记，且防止位置环最后抖动误进判断
+	{
+		motor5.apid.trigger_first_total_angle_storage=motor5.total_angle;
+		angle_judge_flag++;
+	}
+	if(abs(motor5.apid.err<5000000))//由于没有绝对相等，我们取75约等于0，即err=75时就停下来
+		angle_judge_flag=0;
+	set_trigger_angle(trigger_angle);
+}

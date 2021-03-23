@@ -24,7 +24,10 @@ void Robo_Move()
   }
  /***** 各运动控制函数 ******/
 		chassis_speed_control(Liner_X, Liner_Y, Angular_Z);		 //底盘速度控制
-		trigger_control(Trigger_Speed);	                       //拨弹轮速度控制
+	if(TRIGGER_POS_EN)	
+		trigger_angle_control(Trigger_Angle);
+	else
+		trigger_control(Trigger_Speed);                      //拨弹轮速度控制
 	
     if(gimbal_modes == gimbal_can_mode)	          //如果在云台模式下
 		{
@@ -37,7 +40,9 @@ void Robo_Move()
 	 
  /***** pid计算及电流赋值 *****/
    	vpid_chassis_realize(v_chassis_p,v_chassis_i,v_chassis_d);			//速度闭环2  0.05
-	  vpid_trigger_realize(v_trigger_p,v_trigger_i,v_trigger_d);      //拨弹轮速度闭环  参数未确定   2.5  0.05
+	if(TRIGGER_POS_EN)
+		apid_trigeer_realize(a_trigger_p,a_trigger_i,a_trigger_d);	
+	vpid_trigger_realize(v_trigger_p,v_trigger_i,v_trigger_d);
 		if(GIMBAL_POS_EN)
      apid_gimbal_realize(a_yaw_p,a_yaw_i,a_yaw_d,a_pitch_p,a_pitch_i,a_pitch_d);	        //云台位置环给定
 		

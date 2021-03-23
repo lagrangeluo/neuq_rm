@@ -10,7 +10,6 @@
       <TargetName>底盘</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -326,8 +325,8 @@
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>0</v6Lang>
-            <v6LangP>0</v6LangP>
+            <v6Lang>1</v6Lang>
+            <v6LangP>1</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -337,7 +336,7 @@
               <MiscControls>--c99</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F427_437xx,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\CMSIS\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\User\delay;..\Hardware\LED;..\Hardware\motor;..\Hardware\STMFLASH;..\Hardware\flash;..\Hardware\power;..\Hardware\key;..\Hardware\BUZZER;..\Hardware\DJi_remote;..\Hardware\remote_code;..\Hardware\TIM3_Events;..\APP\kinematic;..\APP\angle_pid;..\APP\speed_pid;..\APP\json;..\BSP\usart;..\BSP\timer;..\BSP\can;..\User\Init;..\Hardware\fric;..\APP\mode;..\Hardware\gimbal;..\APP\judge;..\Hardware\imuReader;..\User\sys;..\User\algorithm</IncludePath>
+              <IncludePath>..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\CMSIS\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\User\delay;..\Hardware\LED;..\Hardware\motor;..\Hardware\STMFLASH;..\Hardware\flash;..\Hardware\power;..\Hardware\key;..\Hardware\BUZZER;..\Hardware\DJi_remote;..\Hardware\remote_code;..\Hardware\TIM3_Events;..\APP\kinematic;..\APP\angle_pid;..\APP\speed_pid;..\APP\json;..\BSP\usart;..\BSP\timer;..\BSP\can;..\User\Init;..\Hardware\fric;..\APP\mode;..\Hardware\gimbal;..\APP\judge;..\Hardware\imuReader;..\User\sys;..\User\algorithm;..\APP\encoder;..\APP\shoot</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -600,6 +599,11 @@
               <FileName>judge.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\judge\judge.c</FilePath>
+            </File>
+            <File>
+              <FileName>encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\encoder\encoder.c</FilePath>
             </File>
           </Files>
         </Group>

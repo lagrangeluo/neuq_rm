@@ -103,7 +103,7 @@ uint8_t flag_command_recieved2 = 0;
 uint8_t flag_command_recieved3 = 0;
 uint8_t flag_command_recieved4 = 0;
 uint8_t flag_command_recieved5 = 0;
-
+uint8_t flag_command_recieved6 = 0;
 
 void JSON_USART_IRQHandler(void)
 {

@@ -8,9 +8,9 @@
 #define	CAN_3508Motor2_ID      0x202
 #define	CAN_3508Motor3_ID      0x203
 #define	CAN_3508Motor4_ID      0x204
-#define CAN_TRIGGER_ID         0x205
-#define CAN_GIMBAL_Y_ID         0x20A
-#define CAN_GIMBAL_P_ID         0x20B
+#define CAN_TRIGGER_ID         0x207
+#define CAN_GIMBAL_Y_ID         0x205
+#define CAN_GIMBAL_P_ID         0x206
 
 
 //电机转速pid参数结构体
@@ -44,6 +44,7 @@ typedef struct{
 	int I_OUT;
 	int D_OUT;
 	int PID_OUT;
+	int trigger_first_total_angle_storage;
 	/*int actual_speed;
 	int target_speed;*/
 }APID_t;
@@ -59,6 +60,7 @@ typedef struct{
 	int last_angle;				//上一次返回的角度值
 	int round_cnt;				//相对开机时转过的圈数
 	int total_angle;			//总共转过的计数
+	int last_bullet_angle;		//上次发射子弹时拨弹轮的位置
 	
 	float actual_speed;			//电机真实速度,rpm
 	int target_speed;			//电机目标速度,rpm  转/min
@@ -66,6 +68,7 @@ typedef struct{
 	int actual_current;		//电机真实电流
 	int target_current;		//电机目标电流
 	//int temp;							//电机温度（2006电机不支持，3508支持）
+    int trigger_first_total_angle_storage;
 	VPID_t vpid;
 	APID_t apid;
 }MOTOR_t;

@@ -20,6 +20,7 @@
 #include "gimbal.h"
 #include "delay.h"
 #include "stm32f4xx_it.h"
+#include "shoot.h"
 
 /********信息发送部分********/
 /**
@@ -174,6 +175,24 @@ void resolve_json_gimbal_speed_command()
 	json_decref(root);
 }
 
+void resolve_json_trigger_shoot_command(void)
+{ 
+	int bullet_num=0;
+	json_t *root;
+	json_t *trigger_obj;
+	json_t *item_obj;
+	json_error_t error;
+	root = json_loads(json_Buffer,0,&error);
+	trigger_obj = json_object_get( root, "trigger" );
+	item_obj = json_array_get( trigger_obj, 0 );
+	bullet_num=1.0f*json_integer_value(item_obj); //10000;
+	//item_obj = json_array_get( gimbal_obj, 1 );
+	//Kinematics.pitch.target_angular=1.0f*json_integer_value(item_obj);
+	json_decref(item_obj);
+	json_decref(trigger_obj);
+	json_decref(root);
+	shoot(bullet_num);
+}
 /**
   *@brief 接受上位机调节pid参数
   */

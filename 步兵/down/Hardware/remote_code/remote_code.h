@@ -55,6 +55,11 @@
 	Kinematics.fric.target_angular=fric_angular;     \
 	}while(0)                                        \
 
+	#define fric_shoot_assignment() \
+do{ \
+	Kinematics.fric.target_angular=fric_angular;     \
+	Kinematics.trigger.target_angle=trigger_angle; \
+}while(0)  
 
 void Remote_Control(void);
 float x_max_speed_caculator(float x);

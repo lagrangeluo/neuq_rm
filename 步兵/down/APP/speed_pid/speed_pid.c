@@ -54,6 +54,8 @@ void VPID_Init_All()
   * @breif 速度环pid计算公式，微分项一般不需要
   * @attention 内部函数用户无需调用
   */
+
+int flag_pitch=0;
 void vpid_realize(VPID_t *vpid,float kp,float ki,float kd)
 {
 		vpid->err = vpid->target_speed - vpid->actual_speed;
@@ -138,19 +140,19 @@ void vpid_realize(VPID_t *vpid,float kp,float ki,float kd)
 	 	case(PITCH):
 	 {
 		if(vpid->pid_count>=average)
-		vpid->pid_count=0;
+		{vpid->pid_count=0;flag_pitch=1;}
+		
 		err_pitch[vpid->pid_count] = 0.5*(vpid->err+vpid->last_err);
 		vpid->pid_count++;
 		for(int i=0;i<=(average-1);i++)
 		vpid->average_err += (err_pitch[i]);
-	  	
 	 	if(abs(vpid->err) <= GIMBAL_IntegralSeparation)		//积分分离
 		vpid->err_integration += vpid->average_err;
 	  if(vpid->err_integration > GIMBAL_Integral_max)		//抗积分饱和
 		vpid->err_integration = GIMBAL_Integral_max;
 	  else if(vpid->err_integration < -GIMBAL_Integral_max)
 		vpid->err_integration = -GIMBAL_Integral_max;
-		
+	
 	  vpid->P_OUT = 0.1f*kp*vpid->average_err;								//P项
 	  vpid->I_OUT = ki * vpid->err_integration;		//I项
 	  vpid->D_OUT = kd * (vpid->average_err-vpid->last_average_err);//D项

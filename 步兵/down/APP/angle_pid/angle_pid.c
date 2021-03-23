@@ -156,3 +156,13 @@ void apid_gimbal_realize(float kp_y,float ki_y,float kd_y,float kp_p,float ki_p,
 	set_gimbal_speed(gimbal_y.apid.PID_OUT,gimbal_p.apid.PID_OUT);
 }
 
+//*************************************************************************mhp
+
+void apid_trigeer_realize(float kp,float ki,float kd)
+{
+	motor5.apid.actual_angle = motor5.total_angle-motor5.apid.trigger_first_total_angle_storage;//
+	switch_flag = TRIGGER;
+	apid_realize(&motor5.apid,kp,ki,kd);
+	switch_flag = NUL;
+	set_trigger_speed(motor5.apid.PID_OUT);
+}
